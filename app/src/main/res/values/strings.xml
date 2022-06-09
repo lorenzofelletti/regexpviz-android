@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RegExpViz</string>
+    <string name="regex">Regex</string>
+    <string name="test_string">Test String</string>
+    <string name="example_regex">[a-z]+t</string>
+    <string name="example_test_string">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.</string>
+</resources>
