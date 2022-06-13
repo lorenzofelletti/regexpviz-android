@@ -1,18 +1,47 @@
 package com.lorenzofelletti.regexpviz
 
+import android.graphics.Color
 import android.text.Editable
+import android.text.Spannable
+import android.text.style.BackgroundColorSpan
 import android.widget.EditText
 
-class RegexMatchesSyntaxHighlighter(editTextRegex: EditText, editTextTestString: EditText) : SyntaxHighlighter() {
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        TODO("Not yet implemented")
-    }
+class RegexMatchesSyntaxHighlighter(
+    private val editTextRegex: EditText,
+    private val editTextTestString: EditText
+) :
+    SyntaxHighlighter() {
 
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        TODO("Not yet implemented")
-    }
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
     override fun afterTextChanged(s: Editable?) {
-        TODO("Not yet implemented")
+        if (editTextRegex.text.toString().isEmpty())
+            return
+
+        val regex = Regex.fromLiteral(editTextRegex.text.toString())
+        val matchesSequence = regex.findAll(editTextTestString.text.toString(), 0)
+
+        val testStringEditable = editTextTestString.text
+        testStringEditable.setSpan(
+            BackgroundColorSpan(Color.TRANSPARENT),
+            0,
+            testStringEditable.toString().length,
+            Spannable.SPAN_INCLUSIVE_INCLUSIVE
+        )
+        matchesSequence.forEach {
+            if (it.range.last > 0) {
+                val last =
+                    if (it.range.last + 1 > testStringEditable.length) it.range.last else it.range.last + 1
+                testStringEditable.setSpan(
+                    BackgroundColorSpan(Color.CYAN),
+                    it.range.first,
+                    last,
+                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                )
+            }
+        }
+
     }
 }
