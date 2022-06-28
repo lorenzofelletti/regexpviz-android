@@ -45,11 +45,13 @@
             android:id="@+id/editTextTestString"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
-            android:inputType="textPersonName"
+            android:hint="@string/test_string_hint"
+            android:inputType="textMultiLine|text"
             android:minHeight="48dp"
-            android:text="@string/example_test_string"
-            android:autofillHints="" />
+            android:singleLine="false"
+            android:text="@string/example_test_string" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
